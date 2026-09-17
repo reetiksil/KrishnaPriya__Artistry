@@ -59,7 +59,7 @@
   :root {
   /* Backgrounds: Warm Golden-Beige & Champagne Tones */
   --bg:         #F0E8D5; /* Soft golden parchment background */
-  --bg-soft:    #fec83edf; /* Deeper warm golden background for alternating sections */
+  --bg-soft:    #234e74df; /* Deeper warm golden background for alternating sections */
   --surface:    #F8F3E6; /* Warm cream for cards (replaces harsh white) */
   --surface-hi: #FFFBF2; /* Light golden hover state */
 
