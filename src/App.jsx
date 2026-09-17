@@ -733,14 +733,14 @@ const Contact = () => {
               <span className="contact-icon" aria-hidden="true">📞</span>
               <span className="contact-text">
                 <span className="contact-label">Phone</span>
-                <a href="tel:+919876543210">+91 98765 43210</a>
+                <a href="tel:+9191016 94118">+91 91016 94118</a>
               </span>
             </li>
             <li>
               <span className="contact-icon" aria-hidden="true">💬</span>
               <span className="contact-text">
                 <span className="contact-label">WhatsApp</span>
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/9101694118" target="_blank" rel="noopener noreferrer">
                   Message us on WhatsApp
                 </a>
               </span>
@@ -749,7 +749,7 @@ const Contact = () => {
               <span className="contact-icon" aria-hidden="true">✉️</span>
               <span className="contact-text">
                 <span className="contact-label">Email</span>
-                <a href="mailto:hello@krishnapriyaartistry.com">hello@krishnapriyaartistry.com</a>
+                <a href="mailto:kalita.krishnapriya@gmail.com">kalita.krishnapriya@gmail.com</a>
               </span>
             </li>
             <li>
@@ -778,7 +778,7 @@ const Contact = () => {
               <select id="cf-interest" className="form-control" defaultValue="General Enquiry">
                 <option>General Enquiry</option>
                 {courses.map(c => <option key={c.id}>{c.title}</option>)}
-                <option>Weekend Workshops</option>
+                <option>Workshops</option>
               </select>
             </div>
             <div className="form-group">
@@ -828,16 +828,22 @@ const Footer = () => (
           <h4>Connect</h4>
           <ul className="footer-links">
             <li><a href="#!">Instagram</a></li>
-            <li><a href="#!">Facebook</a></li>
+            <li><a href="https://www.facebook.com/p/Krishna-Priya-Artistry-100063784853848/">Facebook</a></li>
             <li><a href="#!">WhatsApp</a></li>
           </ul>
         </div>
         <div>
           <h4>Contact</h4>
           <ul className="footer-links">
-            <li><a href="mailto:hello@krishnapriyaartistry.com">hello@krishnapriyaartistry.com</a></li>
-            <li><a href="tel:+919876543210">+91 98765 43210</a></li>
-            <li>Tarajan, Jorhat, Assam</li>
+            <li><a href="mailto:kalita.krishnapriya@gmail.com">kalita.krishnapriya@gmail.com</a></li>
+            <li><a href="tel:+919876543210">+91 91016 94118</a></li>
+            <li><a
+                  href="https://maps.google.com/?q=Tarajan,+Jorhat,+Assam"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Tarajan, Jorhat, Assam
+                </a></li>
           </ul>
         </div>
       </div>
