@@ -5,33 +5,39 @@
 :root {
   color-scheme: dark;
 
-  /* ---- Surfaces: deep navy / soft charcoal, warm cast ----------------
-     The whole page now sits in the hero's tonal family, so scrolling out
-     of the hero is a step down in brightness rather than a jolt. ------- */
-  --bg:         #171C26;   /* page background          */
-  --bg-soft:    #1C222E;   /* alternating bands        */
-  --surface:    #222937;   /* cards, fields, chips     */
-  --surface-hi: #2A3242;   /* raised / hover           */
-  --line:       rgba(239, 215, 155, 0.13);
+  /* ---- Surfaces: warm cream & soft gold, professional and airy ---------
+     A light, editorial backdrop that lets the terracotta/gold accents and
+     the dark navy hero/footer bands do the contrast work. ---------------- */
+  --bg:         #F0E8D5;   /* soft golden parchment — page background   */
+  --bg-soft:    #E7D9B8;   /* deeper warm gold-cream — alternating texture */
+  --surface:    #FAF5E7;   /* warm cream — cards, fields, chips          */
+  --surface-hi: #FFFBF2;   /* lightest warm white — raised / hover       */
+  --line:       rgba(180, 138, 75, 0.28);   /* warm antique-gold hairline */
 
-  /* ---- Type ---- */
-  --heading:    #F4EEE1;
-  --text-dark:  #E6E0D3;   /* body copy (name kept: used widely) */
-  --text-muted: #A79F90;
-  --text-light: #FAF3E4;
+  /* ---- Type: deep espresso, softer than pure black on gold ---- */
+  --heading:    #282017;
+  --text-dark:  #463B2F;
+  --text-muted: #796C5C;
+  --text-light: #FAF3E4;   /* used only on the dark navy bands below */
+
+  /* ---- Dark accent bands: hero, mission panel, CTA, footer, WhyChooseUs.
+     One consistent navy family carries every "dark" moment on the site,
+     so they read as one deliberate system rather than five different darks. */
+  --navy: #f1d692;
+  --navy-deep: #12192B;
+  --navy-soft: #e19769;
 
   /* ---- Brand accents ---- */
-    --navy: #252d39;
-    --navy-deep: #141D33;
-    --navy-soft: #62d1dc;
   --terracotta: #D9552F;
   --terracotta-dark: #BC431F;
-  --terracotta-soft: #F0895F;  /* accent legible on dark surfaces */
-  --gold: #d49f2e;
-  --gold-soft: #EFD79B;
-  --teal: #3FBFA8;             /* lifted for contrast on dark */
+  --terracotta-soft: #F0895F;
+  --gold: #D49F2E;
+  --gold-accent: #C49646;   /* richer gold for borders/icons on light surfaces */
+  --gold-soft: #EFD79B;     /* light gold — used on the dark navy bands */
+  --teal: #3FBFA8;
   --pink: #E877AB;
-  --rainbow: linear-gradient(90deg, #D9552F, #C9982B, #1B7A6C, #2A3A60, #DE5C92);
+  /* Signature duotone — hero rule, section underlines, panel top-strips */
+  --rainbow: linear-gradient(90deg, var(--terracotta), var(--gold), var(--terracotta-soft));
 
   /* Legacy aliases — older rules still reference these names */
   --bg-cream: var(--bg);
@@ -49,49 +55,37 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --radius: 16px;
   --nav-h: 76px;
-  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.30);
-  --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.38);
-  --shadow-lg: 0 26px 56px rgba(0, 0, 0, 0.46);
+  /* Warm brown-tinted shadows — a black shadow reads muddy on a gold page */
+  --shadow-sm: 0 4px 16px rgba(40, 32, 23, 0.09);
+  --shadow-md: 0 14px 34px rgba(40, 32, 23, 0.13);
+  --shadow-lg: 0 26px 56px rgba(40, 32, 23, 0.18);
 }
 
 /* Native dark mode: same design, a little deeper and less luminous. */
-@media (prefers-color-scheme: dark) {
+/* Native dark mode: a warm, harmonized dark variant of the same palette —
+   deep espresso surfaces with cream text and the same gold/terracotta
+   accents, rather than a cold, unrelated dark theme. */
+/* @media (prefers-color-scheme: dark) {
   :root {
-  /* Backgrounds: Warm Golden-Beige & Champagne Tones */
-  --bg:         #F0E8D5; /* Soft golden parchment background */
-  --bg-soft:    #234e74df; /* Deeper warm golden background for alternating sections */
-  --surface:    #F8F3E6; /* Warm cream for cards (replaces harsh white) */
-  --surface-hi: #FFFBF2; /* Light golden hover state */
+    --bg:         #1C1712;
+    --bg-soft:    #241D15;
+    --surface:    #2A2119;
+    --surface-hi: #332920;
+    --line:       rgba(212, 159, 46, 0.22);
 
-  /* Accents & Borders */
-  --line:       rgba(180, 138, 75, 0.28); /* Warm antique gold borders */
-  --gold-accent: #C49646;                 /* Warm metallic gold highlight */
+    --heading:    #F3E9D2;
+    --text-dark:  #E4D8C1;
+    --text-muted: #B0A28A;
 
-  /* Typography: Deep Espresso Tones (softer than black on gold) */
-  --heading:    #282017; 
-  --text-dark:  #463B2F; 
-  --text-muted: #796C5C; 
-
-  /* Shadows: Soft brown/warm-tinted shadows instead of stark black */
-  --shadow-sm:  0 4px 16px rgba(40, 32, 23, 0.06);
-  --shadow-md:  0 14px 34px rgba(40, 32, 23, 0.09);
-  --shadow-lg:  0 26px 56px rgba(40, 32, 23, 0.12);
-}
-}
+    --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.42);
+    --shadow-lg: 0 26px 56px rgba(0, 0, 0, 0.5);
+  }
+} */
 
 /* Light-mode users keep the same dark aesthetic, lifted a touch so it
    doesn't read as a black hole next to a bright browser chrome. */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg:         #1B212C;
-    --bg-soft:    #212834;
-    --surface:    #28303E;
-    --surface-hi: #313949;
-    --heading:    #F8F3E8;
-    --text-dark:  #ECE7DB;
-    --text-muted: #B3AB9C;
-  }
-}
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
@@ -126,8 +120,7 @@ ul { list-style: none; }
 .dark-section + .section-padding,
 .news-section + .section-padding,
 .cta-section + .section-padding { padding-block-start: clamp(2.75rem, 5.5vw, 4.5rem); }
-.dark-section { background: var(--bg-soft); color: var(--text-light); }
-
+.dark-section { background: var(--navy-deep); color: var(--text-light); }
 /* ---------- Reveal animation ---------- */
 .reveal {
   opacity: 0;
@@ -149,6 +142,7 @@ ul { list-style: none; }
 .eyebrow-light { color: var(--gold-soft); }
 .eyebrow { color: var(--terracotta-soft); }
 
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
@@ -168,8 +162,8 @@ ul { list-style: none; }
 .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
 .btn-ghost { border: 2px solid rgba(255, 255, 255, 0.75); color: #fff; backdrop-filter: blur(4px); }
 .btn-ghost:hover { background: rgba(255, 255, 255, 0.16); transform: translateY(-2px); }
-.btn-outline-dark { border: 2px solid var(--gold-soft); color: var(--gold-soft); }
-.btn-outline-dark:hover { background: var(--gold-soft); color: var(--navy-deep); transform: translateY(-2px); }
+.btn-outline-dark { border: 2px solid var(--navy); color: var(--navy); }
+.btn-outline-dark:hover { background: var(--navy); color: #fff; transform: translateY(-2px); }
 
 /* ==================================================================
    NAVBAR
@@ -228,7 +222,7 @@ ul { list-style: none; }
   width: 42px; height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--gold-accent);
   background: #fff;
   transition: transform 0.35s var(--ease);
 }
@@ -649,7 +643,7 @@ ul { list-style: none; }
 }
 .mission-inner { padding: 2.9rem clamp(1.5rem, 4vw, 3.5rem); text-align: center; position: relative; z-index: 2; }
 .mission-text {
-  font-family: var(--font-serif);
+  font-family: ui-sans-serif;
   font-style: italic;
   font-size: clamp(1.05rem, 1.75vw, 1.35rem);
   line-height: 1.85;
@@ -668,7 +662,7 @@ ul { list-style: none; }
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.09);
   border: 1px solid rgba(239, 215, 155, 0.3);
-  color: var(--gold-soft);
+  color: #eeebe5;
 }
 
 /* ==================================================================
@@ -677,6 +671,15 @@ ul { list-style: none; }
 .section-header { text-align: center; max-width: 660px; margin: 0 auto 2.4rem; }
 .section-header h2 { font-size: clamp(2rem, 3.6vw, 2.7rem); color: var(--heading); margin-bottom: 0.8rem; }
 .section-header p { color: var(--text-muted); font-size: 1.05rem; }
+/* Echoes the hero's rule — ties every section back to the same motif */
+.section-header::after {
+  content: '';
+  display: block;
+  width: 56px; height: 3px;
+  margin: 1.1rem auto 0;
+  background: var(--rainbow);
+  border-radius: 2px;
+}
 .dark-section .section-header h2 { color: #fff; }
 .dark-section .section-header p { color: rgba(255, 255, 255, 0.78); }
 
@@ -734,7 +737,7 @@ ul { list-style: none; }
 .feature-teal { background: rgba(27, 122, 108, 0.24); }
 .feature-gold { background: rgba(201, 152, 43, 0.24); }
 .feature-pink { background: rgba(222, 92, 146, 0.22); }
-.feature-item h3 { color: var(--heading); font-size: 1.15rem; margin-bottom: 0.6rem; }
+.feature-item h3 { color: #F0895F; font-size: 1.15rem;  margin-bottom: 0.6rem; }
 .feature-item p { color: rgba(255, 255, 255, 0.76); font-size: 0.93rem; }
 
 /* ==================================================================
@@ -1132,19 +1135,20 @@ ul { list-style: none; }
   padding: 0.85rem 1rem;
   border: 1.5px solid var(--line);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #FFFFFF;
   font-family: inherit; font-size: 0.96rem;
   color: var(--text-dark);
   transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.25s var(--ease);
 }
-.form-control::placeholder { color: #857E70; }
-.form-control option { background: var(--surface); color: var(--text-dark); }
 .form-control:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.07);
+  background: #FFFFFF;
   border-color: var(--terracotta-soft);
-  box-shadow: 0 0 0 4px rgba(217, 85, 47, 0.18);
+  box-shadow: 0 0 0 4px rgba(217, 85, 47, 0.14);
 }
+.form-control::placeholder { color: #857E70; }
+.form-control option { background: var(--surface); color: var(--text-dark); }
+
 textarea.form-control { min-height: 120px; resize: vertical; }
 
 /* ==================================================================
