@@ -184,25 +184,34 @@ export const courses = [
    WORKSHOPS
 ------------------------------------------------------------------ */
 export const workshops = [
-  {
+    {
     id: 1,
-    title: "Japi & Bamboo Wall Art",
-    date: "Nov 12, 2026",
-    desc: "A weekend with cane artisans, decorating a traditional japi you take home.",
-    img: "/assets/japi-feather-craft.jpg"
+    title: "Crochet Workshop",
+    date: "Aug 30, 2026",
+    time: "3:00 PM – 6:00 PM",
+    desc: "Turn your passion into creation — learn, create and earn through crochet, and build a creative community with us.",
+    location: "Amar Enclave, Tarajan, Jorhat",
+    contact: "9101694118",
+    img: "/assets/crochet-workshop-poster.jpg"
   },
-  {
+    {
     id: 2,
     title: "Embroidery Keepsake Hoops",
     date: "Nov 19, 2026",
+    time: "10:00 AM – 1:00 PM",
     desc: "Stitch a personalised hoop — perfect as a wedding or anniversary gift.",
+    location: "Amar Enclave, Tarajan, Jorhat",
+    contact: "9101694118",
     img: "/assets/embroidery-anniversary-hoop.jpg"
   },
   {
     id: 3,
     title: "Bottle Lamp & Mosaic Night",
     date: "Nov 26, 2026",
+    time: "5:00 PM – 8:00 PM",
     desc: "Turn a glass bottle into a glowing mosaic lamp in a single evening session.",
+    location: "Amar Enclave, Tarajan, Jorhat",
+    contact: "9101694118",
     img: "/assets/bottle-lamps.jpg"
   }
 ];

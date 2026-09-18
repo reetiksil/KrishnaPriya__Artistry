@@ -18,6 +18,20 @@ import {
    Swap this single path to change the hero backdrop. */
 // const HERO_BACKGROUND = '/assets/hero/hero-japi.jpg';
 
+
+/* ==================================================================
+   VALIDATION — shared by the Reserve-a-Seat modal and the contact form
+================================================================== */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Indian mobile numbers: optional +91 or leading 0, then a 10-digit
+// number starting 6-9. Spaces/dashes are stripped before testing.
+const PHONE_RE = /^(?:\+91|0)?[6-9]\d{9}$/;
+
+const isValidEmail = value => EMAIL_RE.test(value.trim());
+const isValidPhone = value => PHONE_RE.test(value.replace(/[\s-]/g, ''));
+const isValidContact = value => isValidEmail(value) || isValidPhone(value);
+
+
 /* ==================================================================
    HOOKS
 ================================================================== */
@@ -432,30 +446,132 @@ const WhyChooseUs = () => (
    WORKSHOPS
 ================================================================== */
 
-const Workshops = () => (
-  <section id="workshops" className="section-padding container">
-    <div className="section-header reveal">
-      <span className="eyebrow">Weekend Workshops</span>
-      <h2>Create Something Special</h2>
-      <p>Drop-in sessions to try a craft without committing to a full course.</p>
-    </div>
-    <div className="workshops-grid">
-      {workshops.map((ws, i) => (
-        <div key={ws.id} className="workshop-card reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-          <div className="workshop-img-wrap">
-            <img src={ws.img} alt={ws.title} loading="lazy" />
-            <span className="workshop-date">{ws.date}</span>
+const ReserveModal = ({ workshop, onClose }) => {
+  const [name, setName] = React.useState('');
+  const [contact, setContact] = React.useState('');
+  const [touched, setTouched] = React.useState(false);
+  const [reserved, setReserved] = React.useState(false);
+
+  const nameValid = name.trim().length > 1;
+  const contactValid = isValidContact(contact);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setTouched(true);
+    if (!nameValid || !contactValid) return;
+    setReserved(true);
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reserve-title"
+        onClick={e => e.stopPropagation()}
+      >
+        <button type="button" className="modal-close" onClick={onClose} aria-label="Close">✕</button>
+
+        {reserved ? (
+          <div className="modal-success">
+            <span className="modal-success-icon" aria-hidden="true">✓</span>
+            <h3>You're in, {name.trim().split(' ')[0]}!</h3>
+            <p>We've noted your seat for <strong>{workshop.title}</strong> and will reach out at {contact} to confirm.</p>
+            <button type="button" className="btn btn-primary" onClick={onClose}>Done</button>
           </div>
-          <div className="workshop-content">
-            <h3>{ws.title}</h3>
-            <p>{ws.desc}</p>
-            <a href="#contact" className="course-link">Reserve a Seat <span>→</span></a>
-          </div>
-        </div>
-      ))}
+        ) : (
+          <>
+            <span className="modal-eyebrow">Reserve Your Seat</span>
+            <h3 id="reserve-title">{workshop.title}</h3>
+            <p className="modal-sub">
+              {workshop.date}{workshop.time ? ` · ${workshop.time}` : ''}
+              {workshop.location ? ` · ${workshop.location}` : ''}
+            </p>
+
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="form-group">
+                <label htmlFor="rsvp-name">Name</label>
+                <input
+                  id="rsvp-name"
+                  type="text"
+                  className={`form-control ${touched && !nameValid ? 'form-control-invalid' : ''}`}
+                  placeholder="Your full name"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                />
+                {touched && !nameValid && <span className="field-error">Please enter your name.</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="rsvp-contact">Phone Number or Email</label>
+                <input
+                  id="rsvp-contact"
+                  type="text"
+                  className={`form-control ${touched && !contactValid ? 'form-control-invalid' : ''}`}
+                  placeholder="e.g. 98765 43210 or you@email.com"
+                  value={contact}
+                  onChange={e => setContact(e.target.value)}
+                />
+                {touched && !contactValid && <span className="field-error">Enter a valid phone number or email.</span>}
+              </div>
+              <button type="submit" className="btn btn-primary btn-block">Participate</button>
+            </form>
+          </>
+        )}
+      </div>
     </div>
-  </section>
-);
+  );
+};
+
+const Workshops = () => {
+  const [reserveFor, setReserveFor] = React.useState(null);
+
+  React.useEffect(() => {
+    if (!reserveFor) return;
+    const onKey = e => { if (e.key === 'Escape') setReserveFor(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [reserveFor]);
+
+  return (
+    <section id="workshops" className="section-padding container">
+      <div className="section-header reveal">
+        <span className="eyebrow">Weekend Workshops</span>
+        <h2>Create Something Special</h2>
+        <p>Drop-in sessions to try a craft without committing to a full course.</p>
+      </div>
+      <div className="workshops-grid">
+        {workshops.map((ws, i) => (
+          <div key={ws.id} className="workshop-card reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+            <div className="workshop-img-wrap">
+              <img src={ws.img} alt={ws.title} loading="lazy" />
+              <span className="workshop-date">
+                {ws.date}
+                {ws.time && <span className="workshop-time">{ws.time}</span>}
+              </span>
+            </div>
+            <div className="workshop-content">
+              <h3>{ws.title}</h3>
+              <p>{ws.desc}</p>
+              {(ws.location || ws.contact) && (
+                <p className="workshop-meta">
+                  {ws.location && <span>{ws.location}</span>}
+                  {ws.location && ws.contact && <span aria-hidden="true">·</span>}
+                  {ws.contact && <a href={`tel:+91${ws.contact}`}>Call {ws.contact}</a>}
+                </p>
+              )}
+              <button type="button" className="course-link" onClick={() => setReserveFor(ws)}>
+                Reserve a Seat <span>→</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {reserveFor && <ReserveModal workshop={reserveFor} onClose={() => setReserveFor(null)} />}
+    </section>
+  );
+};
 
 /* ==================================================================
    DEDICATED NEWS SECTION — editorial, infinite horizontal scroll
@@ -705,6 +821,17 @@ const CTA = () => (
 
 const Contact = () => {
   const [sent, setSent] = React.useState(false);
+  const [contact, setContact] = React.useState('');
+  const [contactTouched, setContactTouched] = React.useState(false);
+
+  const contactValid = isValidContact(contact);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setContactTouched(true);
+    if (!contactValid) return;
+    setSent(true);
+  };
 
   return (
     <section id="contact" className="section-padding container">
@@ -763,15 +890,26 @@ const Contact = () => {
           </ul>
         </div>
 
-        <div className="contact-form reveal">
-          <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
+                <div className="contact-form reveal">
+          <form onSubmit={handleSubmit} noValidate>
             <div className="form-group">
               <label htmlFor="cf-name">Name</label>
               <input id="cf-name" type="text" className="form-control" placeholder="Your name" />
             </div>
             <div className="form-group">
               <label htmlFor="cf-contact">Email or Phone</label>
-              <input id="cf-contact" type="text" className="form-control" placeholder="How to reach you" />
+              <input
+                id="cf-contact"
+                type="text"
+                className={`form-control ${contactTouched && !contactValid ? 'form-control-invalid' : ''}`}
+                placeholder="How to reach you"
+                value={contact}
+                onChange={e => setContact(e.target.value)}
+                onBlur={() => setContactTouched(true)}
+              />
+              {contactTouched && !contactValid && (
+                <span className="field-error">Enter a valid email address or phone number.</span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="cf-interest">Interested In</label>

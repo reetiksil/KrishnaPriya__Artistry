@@ -715,7 +715,7 @@ ul { list-style: none; }
 .course-body { padding: 1.8rem 1.6rem 1.6rem; }
 .course-body h3 { font-size: 1.24rem; color: var(--heading); margin-bottom: 0.65rem; }
 .course-body p { color: var(--text-muted); font-size: 0.96rem; margin-bottom: 1.1rem; }
-.course-link { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--terracotta-soft); font-weight: 700; font-size: 0.93rem; }
+.course-link { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0; color: var(--terracotta-soft); font-weight: 700; font-size: 0.93rem; }
 .course-link span { transition: transform 0.3s var(--ease); display: inline-block; }
 .course-link:hover span { transform: translateX(5px); }
 
@@ -758,6 +758,10 @@ ul { list-style: none; }
 .workshop-card:hover .workshop-img-wrap img { transform: scale(1.07); }
 .workshop-date {
   position: absolute; top: 14px; left: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
   background: rgba(var(--glass-rgb), 0.82);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -765,12 +769,29 @@ ul { list-style: none; }
   font-size: 0.78rem; font-weight: 700;
   letter-spacing: 0.6px;
   padding: 0.35rem 0.85rem;
-  border-radius: 50px;
+  border-radius: 12px;
   box-shadow: var(--shadow-sm);
+}
+.workshop-time {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: rgba(255, 255, 255, 0.82);
 }
 .workshop-content { padding: 1.6rem; }
 .workshop-content h3 { font-size: 1.22rem; color: var(--heading); margin-bottom: 0.6rem; }
 .workshop-content p { color: var(--text-muted); font-size: 0.96rem; margin-bottom: 1.1rem; }
+.workshop-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: -0.5rem;
+}
+.workshop-meta a { color: var(--terracotta-soft); font-weight: 700; }
+.workshop-meta a:hover { text-decoration: underline; }
 
 /* ==================================================================
    DEDICATED NEWS SECTION + INFINITE MARQUEE
@@ -1333,3 +1354,71 @@ textarea.form-control { min-height: 120px; resize: vertical; }
   .news-marquee { -webkit-mask-image: none; mask-image: none; }
   .hero-progress-fill { animation: none; transform: scaleX(1); }
 }
+
+/* ==================================================================
+   FORM VALIDATION MESSAGING — shared by the contact form and the
+   Reserve-a-Seat modal
+================================================================== */
+.form-control-invalid { border-color: var(--terracotta-dark) !important; }
+.field-error {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--terracotta-dark);
+}
+
+/* ==================================================================
+   RESERVE A SEAT MODAL
+================================================================== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(18, 25, 43, 0.55);
+  backdrop-filter: blur(4px);
+  display: grid; place-items: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s var(--ease);
+}
+.modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2.2rem 2rem;
+  box-shadow: var(--shadow-lg);
+  animation: zoomIn 0.3s var(--ease);
+}
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.modal-close:hover { background: var(--line); color: var(--heading); }
+.modal-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.5rem;
+}
+.modal-panel h3 { font-size: 1.5rem; color: var(--heading); margin-bottom: 0.4rem; }
+.modal-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.6rem; }
+
+.modal-success { text-align: center; padding-top: 0.5rem; }
+.modal-success-icon {
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  margin: 0 auto 1.1rem;
+  border-radius: 50%;
+  background: rgba(63, 191, 168, 0.18);
+  color: var(--teal);
+  font-size: 1.6rem;
+}
+.modal-success h3 { margin-bottom: 0.6rem; }
+.modal-success p { color: var(--text-muted); margin-bottom: 1.6rem; font-size: 0.95rem; }
+.modal-success .btn { width: 100%; }
